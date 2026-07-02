@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 type Props = {
@@ -29,6 +29,13 @@ export default function ImageWithFallback({
   gradientTo = "to-pink-500",
 }: Props) {
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Reset states if source changes
+  useEffect(() => {
+    setError(false);
+    setLoading(true);
+  }, [src]);
 
   // If error, or using mock path that we know doesn't exist yet, show Y2K placeholder
   const showPlaceholder = error || src.startsWith("/images/vol") || !src;
@@ -70,15 +77,28 @@ export default function ImageWithFallback({
   }
 
   return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      fill={fill}
-      priority={priority}
-      className={className}
-      onError={() => setError(true)}
-    />
+    <div className="relative w-full h-full">
+      {loading && (
+        <div className="absolute inset-0 bg-zinc-100 dark:bg-zinc-900 animate-pulse flex items-center justify-center border border-zinc-200 dark:border-zinc-800 rounded-lg">
+          <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/5 to-pink-500/5"></div>
+          {/* tiny grid inside loader */}
+          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+          <span className="font-mono text-[8px] tracking-widest text-zinc-400 dark:text-zinc-600 uppercase animate-pulse">
+            [ LOADING_ASSET... ]
+          </span>
+        </div>
+      )}
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        fill={fill}
+        priority={priority}
+        className={`${className} transition-opacity duration-300 ${loading ? "opacity-0" : "opacity-100"}`}
+        onError={() => setError(true)}
+        onLoad={() => setLoading(false)}
+      />
+    </div>
   );
 }

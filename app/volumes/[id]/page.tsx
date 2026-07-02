@@ -18,6 +18,12 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
+export async function generateStaticParams() {
+  return volumesData.map((vol) => ({
+    id: vol.id.toString(),
+  }));
+}
+
 export default async function VolumeDetailPage({ params }: Props) {
   const resolvedParams = await params;
   const volId = parseInt(resolvedParams.id, 10);
