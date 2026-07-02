@@ -29,12 +29,13 @@ export default function ImageWithFallback({
   gradientTo = "to-pink-500",
 }: Props) {
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const isLocal = src ? src.startsWith("/") : false;
+  const [loading, setLoading] = useState(!isLocal);
 
   // Reset states if source changes
   useEffect(() => {
     setError(false);
-    setLoading(true);
+    setLoading(src ? !src.startsWith("/") : true);
   }, [src]);
 
   // If error, or using mock path that we know doesn't exist yet, show Y2K placeholder

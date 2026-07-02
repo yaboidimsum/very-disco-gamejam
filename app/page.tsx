@@ -4,6 +4,7 @@ import { volumesData } from "./data/volumes";
 import ImageWithFallback from "./components/ImageWithFallback";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ThemeStack from "./components/ThemeStack";
 
 export const metadata = {
   title: "Very Disco Game Jam",
@@ -52,20 +53,8 @@ A collection of games created during the monthly game jams at Apple Developer Ac
             </div>
           </div>
 
-          {/* Hero Image Illustration */}
-          <div className="lg:col-span-6 flex justify-center relative">
-            <div className="relative aspect-[16/9] w-full max-w-[580px] rounded-2xl overflow-hidden shadow-2xl border border-purple-200/50 dark:border-purple-900/30 bg-zinc-950 group glow-purple">
-              <Image
-                src="/images/hero.webp"
-                alt="Very Disco Game Jam Poster Graphic"
-                fill
-                priority
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-              />
-              {/* Retro corners overlay */}
-              <div className="absolute inset-4 border border-white/10 pointer-events-none rounded-lg"></div>
-            </div>
-          </div>
+          {/* Theme Stack Cards */}
+          <ThemeStack />
         </div>
       </section>
 

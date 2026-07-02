@@ -39,8 +39,11 @@ export default function Header() {
               className="object-contain"
             />
           </div>
-          <span className="font-mono text-sm tracking-tight font-black text-black dark:text-white uppercase transition-colors duration-200 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+          <span className="hidden sm:inline font-mono text-sm tracking-tight font-black text-black dark:text-white uppercase transition-colors duration-200 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
             Very Disco Game Jam 2026
+          </span>
+          <span className="inline sm:hidden font-mono text-sm tracking-tight font-black text-black dark:text-white uppercase transition-colors duration-200 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+            VD Game Jam 2026
           </span>
         </Link>
 
