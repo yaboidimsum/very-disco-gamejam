@@ -31,7 +31,7 @@ export default function ThemeStack() {
 
   // Auto-rotate the stack every 8 seconds if user is not interacting
   useEffect(() => {
-    if (hoveredVol !== null || isTransitioning.current) return;
+    if (hoveredVol !== null) return;
     const interval = setInterval(() => {
       triggerSwap(activeVol === 1 ? 2 : 1);
     }, 8000);
