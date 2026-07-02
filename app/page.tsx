@@ -56,7 +56,7 @@ A collection of games created during the monthly game jams at Apple Developer Ac
           <div className="lg:col-span-6 flex justify-center relative">
             <div className="relative aspect-[16/9] w-full max-w-[580px] rounded-2xl overflow-hidden shadow-2xl border border-purple-200/50 dark:border-purple-900/30 bg-zinc-950 group glow-purple">
               <Image
-                src="/images/hero.jpg"
+                src="/images/hero.webp"
                 alt="Very Disco Game Jam Poster Graphic"
                 fill
                 priority

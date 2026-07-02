@@ -33,7 +33,7 @@ export default function Header() {
         >
           <div className="relative w-8 h-8 rounded-lg overflow-hidden active:scale-95 transition-transform duration-100 flex items-center justify-center">
             <Image
-              src="/images/logo.png"
+              src="/images/logo.webp"
               alt="Very Disco Logo"
               fill
               className="object-contain"
