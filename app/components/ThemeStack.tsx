@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { volumesData } from "../data/volumes";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function ThemeStack() {
   const [activeVol, setActiveVol] = useState<number>(2); // Default to Vol. 2 (Cap)
@@ -10,10 +11,20 @@ export default function ThemeStack() {
   const [hoveredVol, setHoveredVol] = useState<number | null>(null);
   const isTransitioning = useRef(false);
 
+  const shouldReduceMotion = useReducedMotion();
+
   const triggerSwap = (targetVol: number) => {
     if (targetVol === activeVol || isTransitioning.current) return;
     
     isTransitioning.current = true;
+    
+    if (shouldReduceMotion) {
+      // Immediate state swap if reduced motion is requested
+      setActiveVol(targetVol);
+      isTransitioning.current = false;
+      return;
+    }
+
     // Step 1: Slide out the currently active card
     setShufflingVol(activeVol);
 
@@ -31,7 +42,7 @@ export default function ThemeStack() {
 
   // Auto-rotate the stack every 8 seconds if user is not interacting
   useEffect(() => {
-    if (hoveredVol !== null) return;
+    if (hoveredVol !== null || isTransitioning.current) return;
     const interval = setInterval(() => {
       triggerSwap(activeVol === 1 ? 2 : 1);
     }, 8000);
@@ -43,52 +54,66 @@ export default function ThemeStack() {
 
   if (!vol1 || !vol2) return null;
 
-  // Custom timing function from Emil's design rules: ease-in-out-cubic
-  // cubic-bezier(0.645, 0.045, 0.355, 1)
-  const transitionStyle = {
-    transition: "transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1), opacity 500ms cubic-bezier(0.645, 0.045, 0.355, 1), border-color 300ms ease, box-shadow 300ms ease",
+  // Timings and cubic-bezier easing from Emil's design system: ease-in-out-cubic
+  const customTransition = {
+    duration: 0.5,
+    ease: [0.645, 0.045, 0.355, 1] as [number, number, number, number],
   };
 
-  // Vol 1 (Chain) CSS class resolver
-  const getVol1Class = () => {
+  // Vol 1 (Chain) Animation target
+  const getVol1Animation = () => {
+    if (shouldReduceMotion) {
+      return {
+        x: activeVol === 1 ? 24 : -32,
+        y: activeVol === 1 ? -24 : 24,
+        rotate: activeVol === 1 ? 3 : -6,
+        scale: activeVol === 1 ? 1 : 0.9,
+        zIndex: activeVol === 1 ? 20 : 10,
+        opacity: activeVol === 1 ? 1 : 0.6,
+      };
+    }
+
     if (shufflingVol === 1) {
-      // Slide out to the left
-      return "z-30 scale-[0.96] -translate-x-[110%] -rotate-[12deg] opacity-95 border-zinc-400";
+      return { x: -360, y: 0, rotate: -12, scale: 0.96, zIndex: 30, opacity: 0.95 };
     }
     if (shufflingVol === 2) {
-      // Preparing to step up from the back
-      return "z-10 scale-[0.96] rotate-[1deg] translate-x-2 -translate-y-2 opacity-85 border-zinc-500";
+      return { x: 8, y: -8, rotate: 1, scale: 0.96, zIndex: 10, opacity: 0.85 };
     }
     if (activeVol === 1) {
-      // Front active card
-      return "z-20 scale-100 rotate-3 translate-x-6 -translate-y-6 border-zinc-300 dark:border-zinc-700";
+      return { x: 24, y: -24, rotate: 3, scale: 1, zIndex: 20, opacity: 1 };
     }
-    // Back card state
     if (hoveredVol === 1) {
-      return "z-10 scale-[0.93] -rotate-12 -translate-x-12 translate-y-10 border-zinc-400 dark:border-zinc-600 opacity-90";
+      return { x: -48, y: 40, rotate: -12, scale: 0.93, zIndex: 10, opacity: 0.9 };
     }
-    return "z-10 scale-90 -rotate-6 -translate-x-8 translate-y-6 opacity-60 border-zinc-800 dark:border-zinc-900 pointer-events-auto";
+    return { x: -32, y: 24, rotate: -6, scale: 0.9, zIndex: 10, opacity: 0.6 };
   };
 
-  // Vol 2 (Cap) CSS class resolver
-  const getVol2Class = () => {
+  // Vol 2 (Cap) Animation target
+  const getVol2Animation = () => {
+    if (shouldReduceMotion) {
+      return {
+        x: activeVol === 2 ? 24 : -32,
+        y: activeVol === 2 ? -24 : 24,
+        rotate: activeVol === 2 ? 3 : -6,
+        scale: activeVol === 2 ? 1 : 0.9,
+        zIndex: activeVol === 2 ? 20 : 10,
+        opacity: activeVol === 2 ? 1 : 0.6,
+      };
+    }
+
     if (shufflingVol === 2) {
-      // Slide out to the right
-      return "z-30 scale-[0.96] translate-x-[110%] rotate-[12deg] opacity-95 border-zinc-400";
+      return { x: 360, y: 0, rotate: 12, scale: 0.96, zIndex: 30, opacity: 0.95 };
     }
     if (shufflingVol === 1) {
-      // Preparing to step up from the back
-      return "z-10 scale-[0.96] rotate-[1deg] translate-x-2 -translate-y-2 opacity-85 border-zinc-500";
+      return { x: 8, y: -8, rotate: 1, scale: 0.96, zIndex: 10, opacity: 0.85 };
     }
     if (activeVol === 2) {
-      // Front active card
-      return "z-20 scale-100 rotate-3 translate-x-6 -translate-y-6 border-zinc-300 dark:border-zinc-700";
+      return { x: 24, y: -24, rotate: 3, scale: 1, zIndex: 20, opacity: 1 };
     }
-    // Back card state
     if (hoveredVol === 2) {
-      return "z-10 scale-[0.93] -rotate-12 -translate-x-12 translate-y-10 border-zinc-400 dark:border-zinc-600 opacity-90";
+      return { x: -48, y: 40, rotate: -12, scale: 0.93, zIndex: 10, opacity: 0.9 };
     }
-    return "z-10 scale-90 -rotate-6 -translate-x-8 translate-y-6 opacity-60 border-zinc-800 dark:border-zinc-900 pointer-events-auto";
+    return { x: -32, y: 24, rotate: -6, scale: 0.9, zIndex: 10, opacity: 0.6 };
   };
 
   return (
@@ -96,12 +121,13 @@ export default function ThemeStack() {
       <div className="relative w-full max-w-[310px] aspect-[4/5] md:max-w-[330px] select-none">
         
         {/* Card 1: Vol. 1 (Chain) */}
-        <div
+        <motion.div
           onClick={() => triggerSwap(1)}
           onMouseEnter={() => setHoveredVol(1)}
           onMouseLeave={() => setHoveredVol(null)}
-          style={transitionStyle}
-          className={`absolute inset-0 rounded-2xl border bg-zinc-950 overflow-hidden shadow-2xl cursor-pointer group ${getVol1Class()}`}
+          animate={getVol1Animation()}
+          transition={customTransition}
+          className="absolute inset-0 rounded-2xl border bg-zinc-950 overflow-hidden shadow-2xl cursor-pointer group will-change-transform"
         >
           {/* Full bleed image */}
           <div className="absolute inset-0 w-full h-full">
@@ -127,15 +153,16 @@ export default function ThemeStack() {
               <span className="font-mono text-[8px] px-2 py-0.5 border border-zinc-200 dark:border-zinc-800 rounded bg-zinc-50 dark:bg-zinc-900 text-zinc-500">[ INDIGO_THEME ]</span>
             </h3>
           </div>
-        </div>
+        </motion.div>
 
         {/* Card 2: Vol. 2 (Cap) */}
-        <div
+        <motion.div
           onClick={() => triggerSwap(2)}
           onMouseEnter={() => setHoveredVol(2)}
           onMouseLeave={() => setHoveredVol(null)}
-          style={transitionStyle}
-          className={`absolute inset-0 rounded-2xl border bg-zinc-950 overflow-hidden shadow-2xl cursor-pointer group ${getVol2Class()}`}
+          animate={getVol2Animation()}
+          transition={customTransition}
+          className="absolute inset-0 rounded-2xl border bg-zinc-950 overflow-hidden shadow-2xl cursor-pointer group will-change-transform"
         >
           {/* Full bleed image */}
           <div className="absolute inset-0 w-full h-full">
@@ -161,7 +188,7 @@ export default function ThemeStack() {
               <span className="font-mono text-[8px] px-2 py-0.5 bg-orange-100 text-orange-700 dark:bg-orange-950/40 dark:text-orange-400 rounded border border-orange-200 dark:border-orange-900/40 font-bold tracking-widest">[ ACTIVE ]</span>
             </h3>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </div>
