@@ -34,8 +34,6 @@ export type Volume = {
   borderColor: string;      // Border color (e.g., 'border-rose-400')
   darkBgColor: string;      // Dark background class
   darkBorderColor: string;  // Dark border class
-  gradientFrom: string;     // Y2K gradient start
-  gradientTo: string;       // Y2K gradient end
 };
 
 export const volumesData: Volume[] = [
@@ -52,8 +50,6 @@ export const volumesData: Volume[] = [
     borderColor: "border-[#c7d2fe]",
     darkBgColor: "dark:bg-indigo-950/20",
     darkBorderColor: "dark:border-indigo-900/50",
-    gradientFrom: "from-[#6366f1]",
-    gradientTo: "to-[#4f46e5]",
     stats: {
       submissionsCount: 9,
       ratingsCount: 27,
@@ -199,8 +195,6 @@ export const volumesData: Volume[] = [
     borderColor: "border-[#fed7aa]",
     darkBgColor: "dark:bg-orange-950/20",
     darkBorderColor: "dark:border-orange-900/50",
-    gradientFrom: "from-[#fb922b]",
-    gradientTo: "to-[#f97316]",
     stats: {
       submissionsCount: 16,
       ratingsCount: 0,

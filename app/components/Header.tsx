@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "./ThemeProvider";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Header() {
@@ -26,23 +25,14 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-black/80">
       <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-6 md:px-8">
-        {/* Brand Logo */}
         <Link 
           href="/" 
-          className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black dark:focus-visible:ring-white rounded-lg p-0.5"
+          className="group rounded-lg p-0.5 font-display text-2xl leading-none text-black transition-colors duration-200 hover:text-zinc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black dark:text-white dark:hover:text-zinc-300 dark:focus-visible:ring-white"
         >
-          <div className="relative w-8 h-8 rounded-lg overflow-hidden active:scale-95 transition-transform duration-100 flex items-center justify-center">
-            <Image
-              src="/images/logo.webp"
-              alt="Very Disco Logo"
-              fill
-              className="object-contain"
-            />
-          </div>
-          <span className="hidden sm:inline font-mono text-sm tracking-tight font-black text-black dark:text-white uppercase transition-colors duration-200 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+          <span className="hidden sm:inline">
             Very Disco Game Jam 2026
           </span>
-          <span className="inline sm:hidden font-mono text-sm tracking-tight font-black text-black dark:text-white uppercase transition-colors duration-200 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+          <span className="inline sm:hidden">
             VD Game Jam 2026
           </span>
         </Link>
@@ -56,7 +46,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative font-mono text-[11px] tracking-[0.15em] font-bold px-3 py-1.5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black dark:focus-visible:ring-white rounded-md ${
+                  className={`relative font-display text-xl px-3 py-1.5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black dark:focus-visible:ring-white rounded-md ${
                     isActive
                       ? "text-black bg-zinc-100 dark:text-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800"
                       : "text-zinc-500 hover:text-black dark:hover:text-white hover:bg-zinc-50/50 dark:hover:bg-zinc-950/50"
