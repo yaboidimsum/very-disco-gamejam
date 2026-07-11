@@ -83,11 +83,11 @@ export default function VantaHeroBackground({ activeVol }: VantaHeroBackgroundPr
               ...baseControls,
               el: containerRef.current,
               THREE,
-              backgroundColor: 0x04040a,
-              color: 0x6d6aff,
-              points: 12,
-              maxDistance: 19,
-              spacing: 17,
+              backgroundColor: 0x07081a,
+              color: 0x8c8fff,
+              points: 13,
+              maxDistance: 22,
+              spacing: 16,
               showDots: false,
             })
           : factory({
@@ -128,13 +128,13 @@ export default function VantaHeroBackground({ activeVol }: VantaHeroBackgroundPr
       <div ref={containerRef} className="absolute inset-0 opacity-70" />
       <div
         className={`absolute inset-0 ${
-          activeVol === 1 ? "bg-white/78 dark:bg-black/70" : "bg-orange-950/20 dark:bg-black/60"
+          activeVol === 1 ? "bg-white/70 dark:bg-black/58" : "bg-orange-950/20 dark:bg-black/60"
         }`}
       />
       <div
         className={`absolute inset-0 ${
           activeVol === 1
-            ? "bg-[radial-gradient(circle_at_70%_50%,rgba(99,102,241,0.16),transparent_42%)]"
+            ? "bg-[radial-gradient(circle_at_70%_50%,rgba(99,102,241,0.24),transparent_46%)]"
             : "bg-[radial-gradient(circle_at_70%_50%,rgba(249,115,22,0.18),transparent_42%)]"
         }`}
       />

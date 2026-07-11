@@ -22,7 +22,7 @@ export default function HeroSection() {
           </h1>
 
           <p className="max-w-lg font-sans text-sm md:text-base leading-relaxed text-white/85 mb-8">
-            A collection of games created through Very Disco, a community-driven game jam initiative by JAMMED Space, the game development interest corner at Apple Developer Academy @ UC Jakarta.
+            A game jam initiative by JAMMED Space, the game development interest corner at Apple Developer Academy @ UC Jakarta.
           </p>
 
           <div className="flex w-full justify-center lg:w-auto lg:justify-start z-10">
