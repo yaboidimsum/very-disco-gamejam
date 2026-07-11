@@ -5,7 +5,6 @@ import Header from "../components/Header";
 
 export const metadata = {
   title: "Volumes - Very Disco Game Jam",
-  description: "Browse all volumes of the Very Disco Game Jam event series.",
 };
 
 export default function VolumesPage() {
@@ -15,12 +14,7 @@ export default function VolumesPage() {
       <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-16 md:px-8">
         {/* Page Header */}
         <div className="relative mb-16 border-b border-zinc-200 pb-8 dark:border-zinc-800">
-          <h1 className="font-display text-6xl text-black dark:text-white uppercase sm:text-7xl">
-            All Volumes
-          </h1>
-          <p className="mt-4 max-w-xl font-sans text-xs leading-5 text-zinc-500">
-            Explore the unique themes, creative rules, and incredible games built during our past game jam volumes.
-          </p>
+          <h1 className="font-display text-6xl text-black dark:text-white uppercase sm:text-7xl">All Volumes</h1>
         </div>
 
         {/* Volumes Grid */}
@@ -32,20 +26,11 @@ export default function VolumesPage() {
             >
               {/* Artwork Cover */}
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-zinc-900">
-                <ImageWithFallback
-                  src={vol.coverImage}
-                  alt={`${vol.title} - ${vol.theme}`}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  text={vol.theme}
-                />
-                
+                <ImageWithFallback src={vol.coverImage} alt={`${vol.title} - ${vol.theme}`} fill className="object-cover transition-transform duration-500 group-hover:scale-105" text={vol.theme} />
+
                 {/* Accent Tag */}
                 <div className="absolute top-4 left-4 z-10">
-                  <span
-                    className="inline-block px-3 py-1 font-sans text-[9px] tracking-widest font-black uppercase text-white rounded-full shadow-sm"
-                    style={{ backgroundColor: vol.accentColor }}
-                  >
+                  <span className="inline-block px-3 py-1 font-sans text-[9px] tracking-widest font-black uppercase text-white rounded-full shadow-sm" style={{ backgroundColor: vol.accentColor }}>
                     {vol.title}
                   </span>
                 </div>
@@ -58,15 +43,7 @@ export default function VolumesPage() {
                   <span className="font-bold text-zinc-500">{vol.date}</span>
                 </div>
 
-                <h2 className="font-display text-4xl text-black dark:text-white uppercase mb-3">
-                  {vol.theme}
-                </h2>
-
-                <p className="text-zinc-600 dark:text-zinc-400 font-sans text-[11px] leading-relaxed mb-6 flex-1">
-                  {vol.description.length > 120
-                    ? `${vol.description.substring(0, 117)}...`
-                    : vol.description}
-                </p>
+                <h2 className="font-display text-4xl text-black dark:text-white uppercase mb-3">{vol.theme}</h2>
 
                 {/* Action Button */}
                 <Link

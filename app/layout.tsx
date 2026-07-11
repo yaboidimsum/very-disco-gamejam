@@ -17,7 +17,6 @@ const jersey25 = Jersey_25({
 
 export const metadata: Metadata = {
   title: "Very Disco Game Jam",
-  description: "A showcase of games from Very Disco Game Jam.",
 };
 
 export default function RootLayout({

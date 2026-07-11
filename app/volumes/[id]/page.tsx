@@ -70,9 +70,6 @@ export default async function VolumeDetailPage({ params }: Props) {
               <span className="font-sans text-[10px] tracking-widest text-zinc-400 font-bold mb-6 block">
                 DATE: {vol.date.toUpperCase()}
               </span>
-              <p className="font-sans text-xs leading-5 text-zinc-700 dark:text-zinc-300 max-w-2xl">
-                {vol.description}
-              </p>
             </div>
           </div>
         </section>
@@ -154,13 +151,7 @@ export default async function VolumeDetailPage({ params }: Props) {
                   BY {game.creators.join(" & ").toUpperCase()}
                 </span>
 
-                {game.description ? (
-                  <p className="font-sans text-[11px] leading-relaxed text-zinc-500 dark:text-zinc-400 mb-6 flex-1">
-                    {game.description}
-                  </p>
-                ) : (
-                  <div className="flex-1 mb-6" />
-                )}
+                <div className="flex-1 mb-6" />
 
                 {/* Criteria stats */}
                 {game.criteria && (
