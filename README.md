@@ -1,37 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Very Disco Game Jam
 
-## Getting Started
+Very Disco Game Jam is a static Next.js showcase for JAMMED Space game jam volumes. The site presents each volume as a small arcade-style archive: bold pixel typography, full-bleed theme artwork, animated volume-specific backgrounds, compact stats, and submission cards that link out to itch.io.
 
-First, run the development server:
+## Current Direction
+
+The site is intentionally dark, graphic, and compact. It should feel like a retro game-jam gallery rather than a marketing landing page.
+
+- Home opens directly into the featured volume experience.
+- Volume switching changes both the theme card and the animated background.
+- Vol. 1 uses a blue rigid net/chain atmosphere.
+- Vol. 2 uses an orange wavy atmosphere.
+- Volume detail pages use a two-panel masthead: full theme image on the left, animated details on the right.
+- Submission descriptions are not stored or displayed anywhere in the app.
+- Light/dark switching UI is disabled; the dark presentation is the intended experience.
+
+## Tech Stack
+
+- Next.js App Router with static export
+- React 19
+- Tailwind CSS 4
+- `framer-motion` / `motion`
+- Vanta.js with Three.js for animated backgrounds
+
+## Project Structure
+
+```txt
+app/
+  components/
+    Header.tsx
+    HeroSection.tsx
+    ThemeStack.tsx
+    VantaHeroBackground.tsx
+    ImageWithFallback.tsx
+    ThemeProvider.tsx
+  data/
+    volumes.ts
+  volumes/
+    page.tsx
+    [id]/page.tsx
+```
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run locally:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build the static site:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Lint:
 
-## Learn More
+```bash
+npm run lint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Content Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Volume and game data lives in `app/data/volumes.ts`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Keep volume data concise:
 
-## Deploy on Vercel
+- Keep `title`, `theme`, `coverImage`, `date`, stats, and games.
+- Do not add `description` fields to volumes or games.
+- Use itch.io links as the canonical play destination.
+- Prefer real jam artwork and real submission images over decorative placeholders.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Design Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# very-disco-gamejam
+The source of truth for visual direction is `DESIGN.md`. Before changing major layout, background animation, typography scale, or volume page structure, update that document alongside the implementation.
