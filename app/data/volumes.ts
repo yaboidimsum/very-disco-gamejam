@@ -4,7 +4,6 @@ export type Game = {
   creators: string[];
   tags: string[];
   itchUrl: string;
-  description?: string;
   rank?: number; // Submissions results rank
   criteria?: {
     hook: { rank: number; score: number };
@@ -19,7 +18,6 @@ export type Volume = {
   theme: string;
   coverImage: string;
   date: string;
-  description: string;
   games: Game[];
   stats?: {
     submissionsCount: number;
@@ -28,14 +26,12 @@ export type Volume = {
     medianRatings: number;
   };
   // Y2K Minimalist style attributes
-  accentColor: string;      // Tailwind class or hex color (e.g., '#ff007f')
-  bgColor: string;          // Tailwind class (e.g., 'bg-rose-50/50')
-  textColor: string;        // Text utility color (e.g., 'text-rose-600')
-  borderColor: string;      // Border color (e.g., 'border-rose-400')
-  darkBgColor: string;      // Dark background class
-  darkBorderColor: string;  // Dark border class
-  gradientFrom: string;     // Y2K gradient start
-  gradientTo: string;       // Y2K gradient end
+  accentColor: string; // Tailwind class or hex color (e.g., '#ff007f')
+  bgColor: string; // Tailwind class (e.g., 'bg-rose-50/50')
+  textColor: string; // Text utility color (e.g., 'text-rose-600')
+  borderColor: string; // Border color (e.g., 'border-rose-400')
+  darkBgColor: string; // Dark background class
+  darkBorderColor: string; // Dark border class
 };
 
 export const volumesData: Volume[] = [
@@ -45,20 +41,17 @@ export const volumesData: Volume[] = [
     theme: "Chain",
     coverImage: "/images/theme/Chain.webp",
     date: "May 2026",
-    description: "Breaking limits and linking mechanics. Volume 1 challenged developers to build around constraint limits (caps) and connection links (chains) in puzzles, cryptography, or physical tethers.",
     accentColor: "#6366f1",
     bgColor: "bg-[#eef2ff]",
     textColor: "text-[#4338ca]",
     borderColor: "border-[#c7d2fe]",
     darkBgColor: "dark:bg-indigo-950/20",
     darkBorderColor: "dark:border-indigo-900/50",
-    gradientFrom: "from-[#6366f1]",
-    gradientTo: "to-[#4f46e5]",
     stats: {
       submissionsCount: 9,
       ratingsCount: 27,
       averageRatings: 3.0,
-      medianRatings: 2
+      medianRatings: 2,
     },
     games: [
       {
@@ -67,13 +60,12 @@ export const volumesData: Volume[] = [
         creators: ["dimasps32"],
         tags: ["web"],
         itchUrl: "https://dimasps32.itch.io/forest-patrol",
-        description: "Who should you trust?",
         rank: 1,
         criteria: {
           hook: { rank: 1, score: 4.0 },
           gameplay: { rank: 2, score: 3.0 },
-          cohesion: { rank: 2, score: 3.667 }
-        }
+          cohesion: { rank: 2, score: 3.667 },
+        },
       },
       {
         title: "Luna",
@@ -81,13 +73,12 @@ export const volumesData: Volume[] = [
         creators: ["hansfigo"],
         tags: ["osx", "web"],
         itchUrl: "https://hansfigo.itch.io/luna",
-        description: "\"Just a little bit higher, Nana. I think I see the sun.\"",
         rank: 2,
         criteria: {
           hook: { rank: 2, score: 3.5 },
           gameplay: { rank: 2, score: 3.0 },
-          cohesion: { rank: 3, score: 3.5 }
-        }
+          cohesion: { rank: 3, score: 3.5 },
+        },
       },
       {
         title: "Almost There",
@@ -95,13 +86,12 @@ export const volumesData: Volume[] = [
         creators: ["HendraaaIrwn", "Suigen Studio", "alberto_yoh"],
         tags: ["web"],
         itchUrl: "https://hendraaairwn.itch.io/almost-there",
-        description: "A game that make you realize that toxic productivity isn't good.",
         rank: 3,
         criteria: {
           hook: { rank: 3, score: 3.333 },
           gameplay: { rank: 5, score: 2.0 },
-          cohesion: { rank: 1, score: 4.0 }
-        }
+          cohesion: { rank: 1, score: 4.0 },
+        },
       },
       {
         title: "BitterSweet",
@@ -109,13 +99,12 @@ export const volumesData: Volume[] = [
         creators: ["malivee"],
         tags: ["osx", "web"],
         itchUrl: "https://malivee.itch.io/bittersweet",
-        description: "Kerlip Studio",
         rank: 4,
         criteria: {
           hook: { rank: 4, score: 2.333 },
           gameplay: { rank: 1, score: 3.333 },
-          cohesion: { rank: 6, score: 2.333 }
-        }
+          cohesion: { rank: 6, score: 2.333 },
+        },
       },
       {
         title: "Animal Kaisar",
@@ -127,8 +116,8 @@ export const volumesData: Volume[] = [
         criteria: {
           hook: { rank: 5, score: 2.0 },
           gameplay: { rank: 2, score: 3.0 },
-          cohesion: { rank: 5, score: 2.5 }
-        }
+          cohesion: { rank: 5, score: 2.5 },
+        },
       },
       {
         title: "Space Bizzare Adventure",
@@ -136,13 +125,12 @@ export const volumesData: Volume[] = [
         creators: ["johanpramudito"],
         tags: ["web"],
         itchUrl: "https://johanpramudito.itch.io/space-bizzare-adventure",
-        description: "Can you survive a mysterious alien world and save humanity?",
         rank: 6,
         criteria: {
           hook: { rank: 5, score: 2.0 },
           gameplay: { rank: 5, score: 2.0 },
-          cohesion: { rank: 4, score: 2.667 }
-        }
+          cohesion: { rank: 4, score: 2.667 },
+        },
       },
       {
         title: "Chain 'Em Up!",
@@ -154,8 +142,8 @@ export const volumesData: Volume[] = [
         criteria: {
           hook: { rank: 5, score: 2.0 },
           gameplay: { rank: 5, score: 2.0 },
-          cohesion: { rank: 7, score: 2.0 }
-        }
+          cohesion: { rank: 7, score: 2.0 },
+        },
       },
       {
         title: "Farm of Chains",
@@ -163,13 +151,12 @@ export const volumesData: Volume[] = [
         creators: ["chnadler"],
         tags: ["web"],
         itchUrl: "https://chnadler.itch.io/farm-of-chains",
-        description: "Lead a farm as pigs, sheep, or ducks faction. Every decision creates a chain of consequences.",
         rank: 8,
         criteria: {
           hook: { rank: 9, score: 1.0 },
           gameplay: { rank: 8, score: 1.5 },
-          cohesion: { rank: 8, score: 1.5 }
-        }
+          cohesion: { rank: 8, score: 1.5 },
+        },
       },
       {
         title: "PingoHunter",
@@ -181,10 +168,10 @@ export const volumesData: Volume[] = [
         criteria: {
           hook: { rank: 8, score: 1.5 },
           gameplay: { rank: 9, score: 1.0 },
-          cohesion: { rank: 9, score: 1.0 }
-        }
-      }
-    ]
+          cohesion: { rank: 9, score: 1.0 },
+        },
+      },
+    ],
   },
   {
     id: 2,
@@ -192,20 +179,17 @@ export const volumesData: Volume[] = [
     theme: "Cap",
     coverImage: "/images/theme/Cap.webp",
     date: "June 2026",
-    description: "Expanding capacities, breaking parameters. Volume 2 challenged developers to design gameplay around hard caps, limiters, storage capacity thresholds, and level-caps in dynamic spaces.",
     accentColor: "#fb922b",
     bgColor: "bg-[#fff7ed]",
     textColor: "text-[#c2410c]",
     borderColor: "border-[#fed7aa]",
     darkBgColor: "dark:bg-orange-950/20",
     darkBorderColor: "dark:border-orange-900/50",
-    gradientFrom: "from-[#fb922b]",
-    gradientTo: "to-[#f97316]",
     stats: {
       submissionsCount: 16,
       ratingsCount: 0,
       averageRatings: 0,
-      medianRatings: 0
+      medianRatings: 0,
     },
     games: [
       {
@@ -214,7 +198,6 @@ export const volumesData: Volume[] = [
         creators: ["alzamzainz"],
         tags: ["osx"],
         itchUrl: "https://alzamzainz.itch.io/13-days-to-deceit",
-        description: "People lie for their own reasons."
       },
       {
         title: "Capsized",
@@ -222,7 +205,6 @@ export const volumesData: Volume[] = [
         creators: ["fuadsalim"],
         tags: ["web"],
         itchUrl: "https://fuadsalim.itch.io/capsized",
-        description: "Don't let Van Der Wijk sink again!"
       },
       {
         title: "Adventure Cap",
@@ -230,7 +212,6 @@ export const volumesData: Volume[] = [
         creators: ["alberto_yoh"],
         tags: ["osx", "web"],
         itchUrl: "https://alberto-yoh.itch.io/adventure-cap",
-        description: "Put on your hat and change the world!"
       },
       {
         title: "StackHouse",
@@ -238,7 +219,6 @@ export const volumesData: Volume[] = [
         creators: ["eccccc"],
         tags: ["web"],
         itchUrl: "https://eccccc.itch.io/stackhouse",
-        description: "Stack the cards, clear them with poker hands."
       },
       {
         title: "Pechevre",
@@ -246,7 +226,6 @@ export const volumesData: Volume[] = [
         creators: ["malivee"],
         tags: ["osx", "web"],
         itchUrl: "https://malivee.itch.io/pechevre",
-        description: "Fish, explore, level-up, and discover secrets beneath the water"
       },
       {
         title: "Terminal Capacity",
@@ -254,7 +233,6 @@ export const volumesData: Volume[] = [
         creators: ["Someonelse2309"],
         tags: ["osx"],
         itchUrl: "https://someonelse2309.itch.io/terminal-capacity",
-        description: "A logic game that stops caring about logic and starts caring about you."
       },
       {
         title: "Almost get the cap",
@@ -262,7 +240,6 @@ export const volumesData: Volume[] = [
         creators: ["hano.r0therme"],
         tags: ["osx"],
         itchUrl: "https://hanor0therme.itch.io/almost-get-the-cap",
-        description: "Almost is not a failure. It's a direction."
       },
       {
         title: "Uncap the Spirit",
@@ -270,7 +247,6 @@ export const volumesData: Volume[] = [
         creators: ["Marsyuma"],
         tags: ["web"],
         itchUrl: "https://marsyuma.itch.io/uncap-the-spirit",
-        description: "A mysteryt-narrative story game"
       },
       {
         title: "cappow",
@@ -278,7 +254,6 @@ export const volumesData: Volume[] = [
         creators: ["ferdianrra"],
         tags: ["web"],
         itchUrl: "https://ferdianrra.itch.io/cappow2",
-        description: "Chaotic local party game for up to 4 players. Shove your friends out of bounds and rack up points to win!"
       },
       {
         title: "Cap or Jail",
@@ -286,7 +261,6 @@ export const volumesData: Volume[] = [
         creators: ["dimaswisodewo"],
         tags: ["osx"],
         itchUrl: "https://dimaswisodewo.itch.io/cap-or-jail",
-        description: "Framed for corruption. One ruined document will destroy your life."
       },
       {
         title: "All Points South",
@@ -294,7 +268,6 @@ export const volumesData: Volume[] = [
         creators: ["dimasps32"],
         tags: ["osx"],
         itchUrl: "https://dimasps32.itch.io/all-points-south",
-        description: "One Train. Hundreds of Lives."
       },
       {
         title: "We Don't Know",
@@ -302,7 +275,6 @@ export const volumesData: Volume[] = [
         creators: ["Ruslan Andreyovich"],
         tags: ["osx"],
         itchUrl: "https://ruslan-andreyovich.itch.io/we-dont-know",
-        description: "Find the cat"
       },
       {
         title: "Don't Trust Your App : Manual Override",
@@ -310,7 +282,6 @@ export const volumesData: Volume[] = [
         creators: ["HendraaaIrwn"],
         tags: ["web"],
         itchUrl: "https://hendraaairwn.itch.io/dont-trust-your-app-manual-override",
-        description: "A cute dystopian puzzle game where Raka must ignore AI orders and activate Manual Override to reclaim human choice."
       },
       {
         title: "TYPEREICH",
@@ -318,14 +289,13 @@ export const volumesData: Volume[] = [
         creators: ["Suigen Studio"],
         tags: ["osx"],
         itchUrl: "https://suigen-studio.itch.io/typereich",
-        description: "You are German's last defense garrison.  protect the CAPITAL at all cost!"
       },
       {
         title: "The Scene",
         image: "",
         creators: ["kejuwafel"],
         tags: ["osx"],
-        itchUrl: "https://kejuwafel.itch.io/the-scene"
+        itchUrl: "https://kejuwafel.itch.io/the-scene",
       },
       {
         title: "The Soda Sniper",
@@ -333,8 +303,7 @@ export const volumesData: Volume[] = [
         creators: ["salmanlfz"],
         tags: ["web"],
         itchUrl: "https://salmanlfz.itch.io/the-soda-sniper",
-        description: "Aim. Flick. Fire. All from your Apple Watch."
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];
