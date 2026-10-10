@@ -7,3 +7,8 @@ declare module "vanta/dist/vanta.net.min" {
   const factory: unknown;
   export default factory;
 }
+
+declare module "vanta/dist/vanta.dots.min" {
+  const factory: unknown;
+  export default factory;
+}

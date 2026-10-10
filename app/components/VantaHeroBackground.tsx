@@ -29,6 +29,8 @@ type VantaFactory = (options: {
   maxDistance?: number;
   spacing?: number;
   showDots?: boolean;
+  size?: number;
+  showLines?: boolean;
 }) => VantaEffect;
 
 interface VantaHeroBackgroundProps {
@@ -54,8 +56,15 @@ export default function VantaHeroBackground({ activeVol }: VantaHeroBackgroundPr
     let cancelled = false;
 
     const destroyEffect = () => {
-      effectRef.current?.destroy();
+      try {
+        effectRef.current?.destroy();
+      } catch {
+        // Ignore DOM detachment errors from Vanta cleanup
+      }
       effectRef.current = null;
+      if (containerRef.current) {
+        containerRef.current.innerHTML = "";
+      }
     };
 
     if (shouldReduceMotion || !containerRef.current) {
@@ -66,42 +75,62 @@ export default function VantaHeroBackground({ activeVol }: VantaHeroBackgroundPr
     async function createEffect() {
       destroyEffect();
 
-      const [{ default: effectFactory }, THREE] = await Promise.all([
-        activeVol === 1
-          ? import("vanta/dist/vanta.net.min")
-          : import("vanta/dist/vanta.waves.min"),
-        import("three"),
-      ]);
+      try {
+        const [{ default: effectFactory }, THREE] = await Promise.all([
+          activeVol === 2
+            ? import("vanta/dist/vanta.waves.min")
+            : import("vanta/dist/vanta.net.min"),
+          import("three"),
+        ]);
 
-      if (cancelled || !containerRef.current) return;
+        if (cancelled || !containerRef.current) return;
 
-      const factory = effectFactory as VantaFactory;
+        if (typeof window !== "undefined") {
+          (window as unknown as { THREE: typeof ThreeNamespace }).THREE = THREE;
+        }
 
-      effectRef.current =
-        activeVol === 1
-          ? factory({
-              ...baseControls,
-              el: containerRef.current,
-              THREE,
-              backgroundColor: 0x07081a,
-              color: 0x8c8fff,
-              points: 13,
-              maxDistance: 22,
-              spacing: 16,
-              showDots: false,
-            })
-          : factory({
-              ...baseControls,
-              el: containerRef.current,
-              THREE,
-              backgroundColor: 0x170705,
-              color: 0xff6614,
-              color2: 0xffb347,
-              shininess: 38,
-              waveHeight: 27,
-              waveSpeed: 0.58,
-              zoom: 0.82,
-            });
+        const factory = effectFactory as VantaFactory;
+
+        effectRef.current =
+          activeVol === 1
+            ? factory({
+                ...baseControls,
+                el: containerRef.current,
+                THREE,
+                backgroundColor: 0x07081a,
+                color: 0x8c8fff,
+                points: 13,
+                maxDistance: 22,
+                spacing: 16,
+                showDots: false,
+              })
+            : activeVol === 2
+              ? factory({
+                  ...baseControls,
+                  el: containerRef.current,
+                  THREE,
+                  backgroundColor: 0x170705,
+                  color: 0xff6614,
+                  color2: 0xffb347,
+                  shininess: 38,
+                  waveHeight: 27,
+                  waveSpeed: 0.58,
+                  zoom: 0.82,
+                })
+              : factory({
+                  ...baseControls,
+                  el: containerRef.current,
+                  THREE,
+                  backgroundColor: 0x140312,
+                  color: 0xec4899,
+                  points: 16,
+                  maxDistance: 22,
+                  spacing: 14,
+                  showDots: true,
+                });
+      } catch {
+        // Fallback seamlessly to CSS ambient gradient
+      }
     }
 
     createEffect();
@@ -122,20 +151,28 @@ export default function VantaHeroBackground({ activeVol }: VantaHeroBackgroundPr
         className={`absolute inset-0 ${
           activeVol === 1
             ? "bg-[radial-gradient(circle_at_75%_45%,rgba(99,102,241,0.32),transparent_34%),radial-gradient(circle_at_22%_78%,rgba(37,99,235,0.18),transparent_38%),linear-gradient(135deg,#050610,#101032)]"
-            : "bg-[radial-gradient(circle_at_74%_42%,rgba(249,115,22,0.34),transparent_34%),radial-gradient(circle_at_22%_80%,rgba(251,191,36,0.18),transparent_38%),linear-gradient(135deg,#130705,#351207)]"
+            : activeVol === 2
+              ? "bg-[radial-gradient(circle_at_74%_42%,rgba(249,115,22,0.34),transparent_34%),radial-gradient(circle_at_22%_80%,rgba(251,191,36,0.18),transparent_38%),linear-gradient(135deg,#130705,#351207)]"
+              : "bg-[radial-gradient(circle_at_74%_42%,rgba(236,72,153,0.34),transparent_34%),radial-gradient(circle_at_22%_80%,rgba(244,63,94,0.18),transparent_38%),linear-gradient(135deg,#160214,#30052a)]"
         }`}
       />
       <div ref={containerRef} className="absolute inset-0 opacity-70" />
       <div
         className={`absolute inset-0 ${
-          activeVol === 1 ? "bg-white/70 dark:bg-black/58" : "bg-orange-950/20 dark:bg-black/60"
+          activeVol === 1
+            ? "bg-white/70 dark:bg-black/58"
+            : activeVol === 2
+              ? "bg-orange-950/20 dark:bg-black/60"
+              : "bg-pink-950/20 dark:bg-black/60"
         }`}
       />
       <div
         className={`absolute inset-0 ${
           activeVol === 1
             ? "bg-[radial-gradient(circle_at_70%_50%,rgba(99,102,241,0.24),transparent_46%)]"
-            : "bg-[radial-gradient(circle_at_70%_50%,rgba(249,115,22,0.18),transparent_42%)]"
+            : activeVol === 2
+              ? "bg-[radial-gradient(circle_at_70%_50%,rgba(249,115,22,0.18),transparent_42%)]"
+              : "bg-[radial-gradient(circle_at_70%_50%,rgba(236,72,153,0.22),transparent_44%)]"
         }`}
       />
     </div>

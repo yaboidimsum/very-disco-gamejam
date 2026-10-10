@@ -6,7 +6,7 @@ import ThemeStack from "./ThemeStack";
 import VantaHeroBackground from "./VantaHeroBackground";
 
 export default function HeroSection() {
-  const [activeVol, setActiveVol] = useState<number>(2); // Default to Vol. 2 (Cap)
+  const [activeVol, setActiveVol] = useState<number>(3); // Default to Vol. 3 (Compact)
 
   return (
     <section className="relative flex min-h-[100dvh] w-full border-b border-zinc-200 bg-y2k-mesh dark:border-zinc-800 overflow-hidden">
@@ -27,11 +27,13 @@ export default function HeroSection() {
 
           <div className="flex w-full justify-center lg:w-auto lg:justify-start z-10">
             <Link
-              href={activeVol === 1 ? "/volumes/1" : "/volumes/2"}
+              href={`/volumes/${activeVol}`}
               className={`inline-flex h-12 items-center justify-center rounded-xl text-white font-sans text-xs tracking-widest font-black shadow-lg transition-all duration-300 active:scale-[0.98] px-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                 activeVol === 1
                   ? "bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 focus-visible:ring-indigo-500"
-                  : "bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-400 focus-visible:ring-orange-500"
+                  : activeVol === 2
+                    ? "bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-400 focus-visible:ring-orange-500"
+                    : "bg-pink-600 hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-400 focus-visible:ring-pink-500"
               }`}
             >
               Explore Volume {activeVol}
